@@ -56,4 +56,13 @@ public class ProductController {
                         .data(product)
                         .build());
     }
+
+    @DeleteMapping("/{id}")
+    public Mono<ApiResponse> delete(@PathVariable String id) {
+        return productService.delete(id)
+                .then(Mono.just(ApiResponse.builder()
+                                .code(HttpStatus.OK.value())
+                                .message("Product with id" + id + "has been deleted.")
+                                .build()));
+    }
 }

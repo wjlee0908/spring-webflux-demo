@@ -54,4 +54,8 @@ public class ProductService {
                 }
         );
     }
+
+    public Mono<Void> delete(String id) {
+        return productRepository.deleteById(id);
+    }
 }
