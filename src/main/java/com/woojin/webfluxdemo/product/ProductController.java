@@ -3,6 +3,7 @@ package com.woojin.webfluxdemo.product;
 import com.woojin.webfluxdemo.common.dto.ApiResponse;
 import com.woojin.webfluxdemo.product.dto.CreateProductRequest;
 import com.woojin.webfluxdemo.product.dto.ManyProductRequest;
+import com.woojin.webfluxdemo.product.dto.UpdateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -45,5 +46,14 @@ public class ProductController {
                         .build());
 
         return response;
+    }
+
+    @PutMapping("/{id}")
+    public Mono<ApiResponse> update(@PathVariable String id, @RequestBody UpdateProductRequest request) {
+        return productService.update(id, request)
+                .map(product -> ApiResponse.builder()
+                        .code(HttpStatus.OK.value())
+                        .data(product)
+                        .build());
     }
 }
