@@ -14,6 +14,10 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    public Mono<Product> getById(String id) {
+        return productRepository.findById(id);
+    }
+
     public Flux<Product> getManyRecent(int page, int limit) {
         Pageable pageable = PageRequest.of(page, limit);
 

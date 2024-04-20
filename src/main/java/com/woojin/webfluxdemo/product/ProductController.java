@@ -27,6 +27,15 @@ public class ProductController {
                         );
     }
 
+    @GetMapping("/{id}")
+    public Mono<ApiResponse> getById(@PathVariable String id) {
+        return productService.getById(id)
+                .map(product -> ApiResponse.builder()
+                        .code(HttpStatus.OK.value())
+                        .data(product)
+                        .build());
+    }
+
     @PostMapping
     public Mono<ApiResponse> create(@RequestBody CreateProductRequest request) {
         Mono<ApiResponse> response = productService.create(request)
