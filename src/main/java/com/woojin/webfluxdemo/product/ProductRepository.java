@@ -7,5 +7,5 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface ProductRepository extends ReactiveMongoRepository<Product, String> {
-    Flux<Product> findAllBy(Pageable pageable);
+    Flux<Product> findAllByOrderByCreatedAtDesc(Pageable pageable);
 }
